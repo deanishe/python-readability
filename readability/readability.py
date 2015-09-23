@@ -69,10 +69,10 @@ def compile_pattern(elements):
         return None
     elif isinstance(elements, regexp_type):
         return elements
-    else:
-        # assume string or string like object
+    elif isinstance(elements, basestring):
         elements = elements.split(',')
-        return re.compile(u'|'.join([re.escape(x.lower()) for x in elements]), re.U)
+    # Default type is iterable
+    return re.compile(u'|'.join([re.escape(x.lower()) for x in elements]), re.U)
 
 class Document:
     """Class to build a etree document out of html."""
